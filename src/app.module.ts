@@ -8,7 +8,7 @@ import { typeOrmConfig } from './config/typeorm.config'
 @Module({
     imports: [
         ConfigModule.forRoot(config),
-        TypeOrmModule.forRootAsync(typeOrmConfig),
+        TypeOrmModule.forRootAsync(typeOrmConfig)
     ],
 })
 export class AppModule {}

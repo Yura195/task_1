@@ -4,6 +4,7 @@ import {
     TypeOrmModuleOptions,
 } from '@nestjs/typeorm'
 
+
 const DEFAULT_PSQL_HOST = 'localhost'
 const DEFAULT_PSQL_PORT = 5432
 
@@ -26,7 +27,9 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
             port: configService.get('PSQL_PORT') || DEFAULT_PSQL_PORT,
             username: configService.get('PSQL_USERNAME'),
             password: configService.get('PSQL_PASSWORD'),
-            synchronize: false,
+            synchronize: configService.get('NODE_ENV') === 'development-no-migration',
+            dropSchema: configService.get('DROP_DATABASE'),
+            migrationsRun:configService.get('NODE_ENV') === 'development',
         }
     },
     inject: [ConfigService],
